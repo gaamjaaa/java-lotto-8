@@ -17,12 +17,14 @@ public class Application {
         LottoIssuer issuer = new LottoIssuer();
         List<Lotto> tickets = issuer.issue(ticketCount);
 
-        lotto.view.OutputView.printPurchasedCount(ticketCount);
-        lotto.view.OutputView.printTickets(tickets);
+        OutputView.printPurchasedCount(ticketCount);
+        OutputView.printTickets(tickets);
 
         WinningNumbers winning = readValidWinningNumbers();
+        int bonus = readValidBonus(winning);
 
-        // 다음 커밋: 보너스 번호 입력/검증
+        // 다음 커밋: 등수/통계 계산 및 출력
+        OutputView.debug("보너스: " + bonus);
     }
 
     private static int readValidAmount() {
@@ -51,6 +53,18 @@ public class Application {
             try {
                 String line = InputView.readWinningNumbersLine();
                 return WinningNumbers.parse(line);
+            } catch (IllegalArgumentException e) {
+                OutputView.printError(e.getMessage());
+            }
+        }
+    }
+
+    private static int readValidBonus(WinningNumbers winning) {
+        while (true) {
+            try {
+                int bonus = InputView.readBonusNumber();
+                winning.validateBonus(bonus);
+                return bonus;
             } catch (IllegalArgumentException e) {
                 OutputView.printError(e.getMessage());
             }
