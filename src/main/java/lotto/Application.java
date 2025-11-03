@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.WinningNumbers;
 import lotto.service.LottoIssuer;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -16,10 +17,12 @@ public class Application {
         LottoIssuer issuer = new LottoIssuer();
         List<Lotto> tickets = issuer.issue(ticketCount);
 
-        OutputView.printPurchasedCount(ticketCount);
-        OutputView.printTickets(tickets);
+        lotto.view.OutputView.printPurchasedCount(ticketCount);
+        lotto.view.OutputView.printTickets(tickets);
 
-        // 다음 커밋: 당첨/보너스 입력
+        WinningNumbers winning = readValidWinningNumbers();
+
+        // 다음 커밋: 보너스 번호 입력/검증
     }
 
     private static int readValidAmount() {
@@ -40,6 +43,17 @@ public class Application {
         }
         if (amount % PRICE_PER_TICKET != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
+        }
+    }
+
+    private static WinningNumbers readValidWinningNumbers() {
+        while (true) {
+            try {
+                String line = InputView.readWinningNumbersLine();
+                return WinningNumbers.parse(line);
+            } catch (IllegalArgumentException e) {
+                OutputView.printError(e.getMessage());
+            }
         }
     }
 }
