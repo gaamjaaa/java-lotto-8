@@ -11,6 +11,12 @@ public final class InputView {
         return parseIntSafely(raw);
     }
 
+    public static String readWinningNumbersLine() {
+        System.out.println();
+        System.out.println("당첨 번호를 입력해 주세요.");
+        return Console.readLine();
+    }
+
     private static int parseIntSafely(String raw) {
         if (raw == null) {
             throw new IllegalArgumentException("[ERROR] 입력이 필요합니다.");
