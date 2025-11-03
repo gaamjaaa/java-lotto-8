@@ -1,9 +1,12 @@
 package lotto;
 
 import java.util.List;
+import java.util.Map;
 import lotto.domain.Lotto;
+import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 import lotto.service.LottoIssuer;
+import lotto.service.ResultAggregator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -23,8 +26,14 @@ public class Application {
         WinningNumbers winning = readValidWinningNumbers();
         int bonus = readValidBonus(winning);
 
-        // 다음 커밋: 등수/통계 계산 및 출력
-        OutputView.debug("보너스: " + bonus);
+        ResultAggregator aggregator = new ResultAggregator();
+        Map<Rank, Integer> counts = aggregator.aggregate(tickets, winning, bonus);
+
+        OutputView.printStatistics(counts);
+
+        long totalReward = aggregator.totalReward(counts);
+        double rate = ProfitCalculator.rate(totalReward, amount);
+        OutputView.printProfitRate(rate);
     }
 
     private static int readValidAmount() {
