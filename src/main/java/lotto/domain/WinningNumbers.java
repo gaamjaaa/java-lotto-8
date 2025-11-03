@@ -40,7 +40,7 @@ public final class WinningNumbers {
         return main.contains(n);
     }
 
-    public int matchCount(lotto.domain.Lotto ticket) {
+    public int matchCount(lotto.Lotto ticket) {
         int cnt = 0;
         for (int n : ticket.getNumbers()) {
             if (main.contains(n)) {

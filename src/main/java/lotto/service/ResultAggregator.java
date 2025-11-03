@@ -3,7 +3,7 @@ package lotto.service;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.Lotto;
+import lotto.Lotto;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
 

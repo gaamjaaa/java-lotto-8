@@ -24,8 +24,8 @@ public final class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printTickets(java.util.List<lotto.domain.Lotto> tickets) {
-        for (lotto.domain.Lotto ticket : tickets) {
+    public static void printTickets(java.util.List<lotto.Lotto> tickets) {
+        for (lotto.Lotto ticket : tickets) {
             java.util.List<Integer> sorted = lotto.service.LottoIssuer.sortedNumbers(ticket);
             System.out.println(sorted);
         }

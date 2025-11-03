@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.Lotto;
 
 public final class LottoIssuer {
     private static final int MIN = 1;
