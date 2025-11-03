@@ -1,5 +1,9 @@
 package lotto.view;
 
+import java.util.List;
+import lotto.domain.Lotto;
+import lotto.service.LottoIssuer;
+
 public final class OutputView {
     private OutputView() {}
 
@@ -15,7 +19,17 @@ public final class OutputView {
         System.out.println("[ERROR] " + message);
     }
 
-    // 개발 진행 중 출력 확인용(제출 전 남겨도 무방)
+    public static void printPurchasedCount(int count) {
+        System.out.println(count + "개를 구매했습니다.");
+    }
+
+    public static void printTickets(List<Lotto> tickets) {
+        for (Lotto ticket : tickets) {
+            List<Integer> sorted = LottoIssuer.sortedNumbers(ticket);
+            System.out.println(sorted);
+        }
+    }
+
     public static void debug(String s) {
         System.out.println(s);
     }

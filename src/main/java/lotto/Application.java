@@ -16,8 +16,10 @@ public class Application {
         LottoIssuer issuer = new LottoIssuer();
         List<Lotto> tickets = issuer.issue(ticketCount);
 
-        // 다음 커밋에서 출력 추가
-        OutputView.debug("발행 완료: " + tickets.size() + "장");
+        OutputView.printPurchasedCount(ticketCount);
+        OutputView.printTickets(tickets);
+
+        // 다음 커밋: 당첨/보너스 입력
     }
 
     private static int readValidAmount() {
