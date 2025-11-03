@@ -1,5 +1,8 @@
 package lotto;
 
+import java.util.List;
+import lotto.domain.Lotto;
+import lotto.service.LottoIssuer;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -9,8 +12,12 @@ public class Application {
     public static void main(String[] args) {
         int amount = readValidAmount();
         int ticketCount = amount / PRICE_PER_TICKET;
-        OutputView.debug("구매 장수: " + ticketCount);
-        // 이후 단계에서 발행/출력, 당첨 입력 추가
+
+        LottoIssuer issuer = new LottoIssuer();
+        List<Lotto> tickets = issuer.issue(ticketCount);
+
+        // 다음 커밋에서 출력 추가
+        OutputView.debug("발행 완료: " + tickets.size() + "장");
     }
 
     private static int readValidAmount() {
@@ -20,7 +27,7 @@ public class Application {
                 validateAmount(amount);
                 return amount;
             } catch (IllegalArgumentException e) {
-                lotto.view.OutputView.printError(e.getMessage());
+                OutputView.printError(e.getMessage());
             }
         }
     }
