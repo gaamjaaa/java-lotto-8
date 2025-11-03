@@ -17,6 +17,13 @@ public final class InputView {
         return Console.readLine();
     }
 
+    public static int readBonusNumber() {
+        System.out.println();
+        System.out.println("보너스 번호를 입력해 주세요.");
+        String raw = Console.readLine();
+        return parseIntSafely(raw);
+    }
+
     private static int parseIntSafely(String raw) {
         if (raw == null) {
             throw new IllegalArgumentException("[ERROR] 입력이 필요합니다.");
